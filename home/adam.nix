@@ -6,6 +6,7 @@
     # GUI apps
     brave
     obsidian
+    remmina
     spotify
 
     # CLI tools (no HM module)
