@@ -72,6 +72,9 @@
       cnix = "sudo code /etc/nixos --no-sandbox --user-data-dir ~/.sudo-vscode";
       nbs  = "sudo nixos-rebuild switch";
       gnix = ''git -C /etc/nixos add -A && git -C /etc/nixos commit -m "$@"'';
+
+      night = "gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true";
+      day   = "gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false";
     };
 
   };
