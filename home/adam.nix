@@ -19,8 +19,9 @@
     # Coding Assistents
     codex
 
-    # Allows nix vscode extension to work on autoformat
+    # Allows 'jnoortheen.nix-ide' to work by providing language server + formatter
     nixfmt-classic
+    nil
   ];
 
 
@@ -103,6 +104,10 @@
         "files.trimTrailingWhitespace" = true;
         "terminal.integrated.defaultProfile.linux" = "zsh";
         "terminal.integrated.sendKeybindingsToShell" = true;
+
+        # jnoortheen.nix-ide settings
+        "nix.enableLanguageServer" = true;
+
       };
     };
   };
