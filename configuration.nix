@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader: ESP at /boot/efi, keep kernels on ext4 under /boot
@@ -9,7 +8,7 @@
     grub.device = "nodev";
     grub.useOSProber = true;
     grub.configurationLimit = 8;
-    grub.copyKernels = false;        # guardrail: never copy kernels to ESP
+    grub.copyKernels = false; # guardrail: never copy kernels to ESP
     efi.canTouchEfiVariables = true;
     efi.efiSysMountPoint = "/boot/efi";
   };
@@ -36,7 +35,10 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.xkb = { layout = "us"; variant = ""; };
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
 
   # Printing & audio
   services.printing.enable = true;
@@ -54,7 +56,7 @@
     isNormalUser = true;
     description = "adam";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;   # login shell; HM configures zsh internals
+    shell = pkgs.zsh; # login shell; HM configures zsh internals
   };
   programs.zsh.enable = true;
 
@@ -84,14 +86,13 @@
   };
 
   # Passwordless nixos-rebuild (optional)
-  security.sudo.extraRules = [
-    {
-      users = [ "adam" ];
-      commands = [
-        { command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild"; options = [ "NOPASSWD" ]; }
-      ];
-    }
-  ];
+  security.sudo.extraRules = [{
+    users = [ "adam" ];
+    commands = [{
+      command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
 
   system.stateVersion = "25.05";
 }
