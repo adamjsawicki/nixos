@@ -86,6 +86,11 @@
     defaultOptions = [ "--height=40%" "--reverse" "--border" ];
   };
 
+  programs.gh = {
+    enable = true;
+    settings.git_protocol = "ssh";
+  };
+
   programs.starship.enable = true;
 
   programs.vscode = {
