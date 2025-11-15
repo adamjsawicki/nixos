@@ -92,6 +92,7 @@
     enable = true;
     profiles.default = {
       enableUpdateCheck = false;
+
       extensions = with pkgs.vscode-extensions; [
         esbenp.prettier-vscode
         golang.go
@@ -99,18 +100,32 @@
         mkhl.direnv
         ms-python.python
       ];
+
       userSettings = {
+        # General
         "editor.formatOnSave" = true;
         "files.trimTrailingWhitespace" = true;
+        "update.mode" = "none";
+
+        # Terminal
         "terminal.integrated.defaultProfile.linux" = "zsh";
         "terminal.integrated.sendKeybindingsToShell" = true;
 
-        # jnoortheen.nix-ide settings
+        # Nix LSP
         "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nil";
 
+        "nix.serverSettings" = {
+          "nil" = {
+            "formatting" = {
+              command = [ "nixfmt" ];
+            };
+          };
+        };
       };
     };
   };
+
 
   programs.git = {
     enable = true;
