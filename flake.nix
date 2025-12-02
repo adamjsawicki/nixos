@@ -29,7 +29,10 @@
             home-manager.useUserPackages = true;
 
             # HM user mapping
-            home-manager.users.adam = import ./home/adam.nix;
+            home-manager.users = {
+              adam = import ./home/adam.nix;
+              root = import ./home/root.nix;
+            };
 
             # Back up pre-existing dotfiles on first activation
             home-manager.backupFileExtension = "hm-bak";
