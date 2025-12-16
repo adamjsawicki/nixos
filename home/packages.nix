@@ -2,8 +2,10 @@
 
   home.packages = with pkgs; [
     # GUI apps
+    _1password-gui
     brave
     obsidian
+    protonvpn-gui
     remmina
     spotify
 
