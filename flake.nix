@@ -35,7 +35,7 @@
             };
 
             # Back up pre-existing dotfiles on first activation
-            home-manager.backupFileExtension = "hm-bak";
+            home-manager.backupFileExtension = ".bak";
 
             # Convenience: HM CLI on PATH system-wide
             environment.systemPackages = [ pkgs.home-manager ];
