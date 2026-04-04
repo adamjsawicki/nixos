@@ -2,20 +2,27 @@
   description = "Adam's NixOS + Home Manager (flake)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
-    in {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    in
+    {
+      nixosConfigurations."adam-laptop" = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ./hardware-configuration.nix
@@ -30,8 +37,8 @@
 
             # HM user mapping
             home-manager.users = {
-              adam = import ./home/adam.nix;
-              root = import ./home/root.nix;
+              adam = import ./modules/users/adam.nix;
+              root = import ./modules/users/root.nix;
             };
 
             # Back up pre-existing dotfiles on first activation
@@ -40,8 +47,9 @@
             # Convenience: HM CLI on PATH system-wide
             environment.systemPackages = [ pkgs.home-manager ];
 
-            # Also allow unfree at system level (redundant but harmless)
+            # Set global 'allowUnfree'
             nixpkgs.config.allowUnfree = true;
+
           }
         ];
       };

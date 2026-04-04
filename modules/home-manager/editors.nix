@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   programs.vscode = {
     enable = true;
+    
     profiles.default = {
       enableUpdateCheck = false;
 

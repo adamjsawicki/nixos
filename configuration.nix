@@ -1,5 +1,15 @@
-{ config, pkgs, ... }: {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+{ config, pkgs, ... }:
+{
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
 
   # Bootloader: ESP at /boot/efi, keep kernels on ext4 under /boot
   boot.loader = {
@@ -33,8 +43,8 @@
 
   # Desktop (GNOME)
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -55,7 +65,10 @@
   users.users.adam = {
     isNormalUser = true;
     description = "adam";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.zsh; # login shell; HM configures zsh internals
   };
   programs.zsh.enable = true;
@@ -70,7 +83,11 @@
   fileSystems."/mnt/ubuntu-home" = {
     device = "/dev/disk/by-uuid/b2113b34-69b7-48c1-8c35-4266b3f9852e";
     fsType = "ext4";
-    options = [ "nofail" "x-systemd.automount" "x-systemd.idle-timeout=600" ];
+    options = [
+      "nofail"
+      "x-systemd.automount"
+      "x-systemd.idle-timeout=600"
+    ];
   };
   fileSystems."/home/adam/Documents" = {
     device = "/mnt/ubuntu-home/swixx/Documents";
@@ -86,13 +103,17 @@
   };
 
   # Passwordless nixos-rebuild (optional)
-  security.sudo.extraRules = [{
-    users = [ "adam" ];
-    commands = [{
-      command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
-      options = [ "NOPASSWD" ];
-    }];
-  }];
+  security.sudo.extraRules = [
+    {
+      users = [ "adam" ];
+      commands = [
+        {
+          command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
 
   system.stateVersion = "25.05";
 }

@@ -2,7 +2,7 @@
   home.stateVersion = "25.05";
   programs.home-manager.enable = true;
 
-  imports = [ ./fzf.nix ./git.nix ./vscode.nix ];
+  imports = [ ./packages.nix ./session.nix ./shell.nix ./vcs.nix ];
 
   programs.starship.enable = true;
 

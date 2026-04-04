@@ -12,15 +12,19 @@
     # CLI tools (no HM module)
     bat
     eza
+    ghostty
     jq
     ripgrep
     zellij
 
     # Coding Assistents
     codex
+    claude-code
 
     # Allows 'jnoortheen.nix-ide' to work by providing language server + formatter
-    nixfmt-classic
+    nixfmt-rfc-style
     nil
+
+    # openclaw
   ];
 }

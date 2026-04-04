@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  imports = [ ./editors.nix ];
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
@@ -8,6 +9,17 @@
       "x-scheme-handler/http" = [ "brave-browser.desktop" ];
       "x-scheme-handler/https" = [ "brave-browser.desktop" ];
       "x-scheme-handler/mailto" = [ "brave-browser.desktop" ];
+    };
+  };
+
+  # Add ProtonVPN desktop entry and icon for menu integration
+  xdg.dataFile = {
+    "applications/proton.vpn.app.gtk.desktop" = {
+      source =
+        "${pkgs.protonvpn-gui}/share/applications/proton.vpn.app.gtk.desktop";
+    };
+    "icons/hicolor/scalable/apps/proton-vpn-logo.svg" = {
+      source = "${pkgs.protonvpn-gui}/share/pixmaps/proton-vpn-logo.svg";
     };
   };
 
@@ -30,12 +42,13 @@
     # Your favorites in the GNOME dock
     "org/gnome/shell" = {
       favorite-apps = [
-        "org.gnome.Console.desktop"
+        "1password.desktop"
         "brave-browser.desktop"
         "code.desktop"
+        "com.mitchellh.ghostty.desktop"
+        "org.gnome.Console.desktop"
+        "proton.vpn.app.gtk.desktop"
         "spotify.desktop"
-        "1password.desktop"
-        "proton-vpn.desktop"
       ];
     };
 

@@ -1,7 +1,6 @@
 { pkgs, ... }: {
 
-  imports =
-    [ ./common.nix ./desktop.nix ./packages.nix ./session.nix ./zsh.nix ];
+  imports = [ ../home-manager/base.nix ../home-manager/desktop.nix ];
 
   programs.direnv = {
     enable = true;

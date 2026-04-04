@@ -2,15 +2,13 @@
 
   programs.git = {
     enable = true;
-    userName = "Adam Sawicki";
-    userEmail = "sawicki.adam.j@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Adam Sawicki";
+      user.email = "sawicki.adam.j@gmail.com";
       safe.directory = "/etc/nixos";
       init.defaultBranch = "main";
       pull.rebase = false;
       push.autoSetupRemote = true;
-
-      # 👇 Force HTTPS → SSH rewrite for GitHub (applies globally)
       url."git@github.com:".insteadOf = "https://github.com/";
     };
   };
