@@ -96,6 +96,9 @@
     polkitPolicyOwners = [ "adam" ];
   };
 
+  # Allow running unpatched dynamic binaries (needed for VSCode extensions like Claude Code)
+  programs.nix-ld.enable = true;
+
   # XDG portals
   xdg.portal = {
     enable = true;
