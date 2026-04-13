@@ -40,6 +40,7 @@
     # Allows 'jnoortheen.nix-ide' to work by providing language server + formatter
     nixfmt-rfc-style
     nil
+    fh # FlakeHub CLI
 
     # Secrets management
     sops
