@@ -102,27 +102,16 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  # Ubuntu home mount + targeted bind mounts
-  fileSystems."/mnt/ubuntu-home" = {
-    device = "/dev/disk/by-uuid/b2113b34-69b7-48c1-8c35-4266b3f9852e";
+  # Shared /home partition (across distros)
+  fileSystems."/home" = {
+    device = "/dev/disk/by-label/home";
     fsType = "ext4";
-    options = [
-      "nofail"
-      "x-systemd.automount"
-      "x-systemd.idle-timeout=600"
-    ];
   };
-  fileSystems."/home/adam/Documents" = {
-    device = "/mnt/ubuntu-home/swixx/Documents";
-    fsType = "none";
-    options = [ "bind" ];
-    depends = [ "/mnt/ubuntu-home" ];
-  };
-  fileSystems."/home/adam/Downloads" = {
-    device = "/mnt/ubuntu-home/swixx/Downloads";
-    fsType = "none";
-    options = [ "bind" ];
-    depends = [ "/mnt/ubuntu-home" ];
+
+  # Shared /data partition (docker, ollama, large files)
+  fileSystems."/data" = {
+    device = "/dev/disk/by-label/data";
+    fsType = "ext4";
   };
 
   # Passwordless nixos-rebuild (optional)
