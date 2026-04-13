@@ -50,6 +50,20 @@
     variant = "";
   };
 
+  # SSH (enables host key generation for sops-nix)
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
+    # If you don't want SSH listening, uncomment:
+    # openFirewall = false;
+  };
+
+  # Tailscale VPN (for remote access)
+  services.tailscale.enable = true;
+
   # Printing & audio
   services.printing.enable = true;
   services.pulseaudio.enable = false;
@@ -72,6 +86,15 @@
     shell = pkgs.zsh; # login shell; HM configures zsh internals
   };
   programs.zsh.enable = true;
+
+  # 1Password - must use NixOS modules (not home-manager packages) for CLI
+  # integration to work. The module sets up polkit policies and the IPC socket
+  # that allows `op` CLI to authenticate through the GUI app.
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "adam" ];
+  };
 
   # XDG portals
   xdg.portal = {
