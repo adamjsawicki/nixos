@@ -1,0 +1,6 @@
+# Secrets templates (the encrypted secrets.yaml IS safe to commit)
+secrets/*.template
+
+# Editor backup files
+*.bak
+*~

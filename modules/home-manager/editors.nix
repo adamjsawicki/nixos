@@ -1,11 +1,13 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.vscode = {
     enable = true;
-    
+
     profiles.default = {
       enableUpdateCheck = false;
 
       extensions = with pkgs.vscode-extensions; [
+        anthropic.claude-code
         esbenp.prettier-vscode
         golang.go
         jnoortheen.nix-ide
@@ -28,7 +30,11 @@
         "nix.serverPath" = "nil";
 
         "nix.serverSettings" = {
-          "nil" = { "formatting" = { command = [ "nixfmt" ]; }; };
+          "nil" = {
+            "formatting" = {
+              command = [ "nixfmt" ];
+            };
+          };
         };
       };
     };

@@ -15,8 +15,7 @@
   # Add ProtonVPN desktop entry and icon for menu integration
   xdg.dataFile = {
     "applications/proton.vpn.app.gtk.desktop" = {
-      source =
-        "${pkgs.protonvpn-gui}/share/applications/proton.vpn.app.gtk.desktop";
+      source = "${pkgs.protonvpn-gui}/share/applications/proton.vpn.app.gtk.desktop";
     };
     "icons/hicolor/scalable/apps/proton-vpn-logo.svg" = {
       source = "${pkgs.protonvpn-gui}/share/pixmaps/proton-vpn-logo.svg";
@@ -35,7 +34,9 @@
       ExecStart = "${pkgs.albert}/bin/albert";
       Restart = "on-failure";
     };
-    Install = { WantedBy = [ "graphical-session.target" ]; };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
   };
 
   dconf.settings = {
@@ -46,8 +47,8 @@
         "brave-browser.desktop"
         "code.desktop"
         "com.mitchellh.ghostty.desktop"
-        "org.gnome.Console.desktop"
         "proton.vpn.app.gtk.desktop"
+        "org.remmina.Remmina.desktop"
         "spotify.desktop"
       ];
     };
@@ -60,11 +61,10 @@
     };
 
     # custom0: Ctrl+Space -> albert
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
-      {
-        name = "Albert Launcher";
-        command = "albert toggle";
-        binding = "<Control>space";
-      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      name = "Albert Launcher";
+      command = "albert toggle";
+      binding = "<Control>space";
+    };
   };
 }
