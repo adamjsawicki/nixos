@@ -40,7 +40,7 @@
       };
     in
     {
-      nixosConfigurations."adam-laptop" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit pkgs-unstable; };
         modules = [

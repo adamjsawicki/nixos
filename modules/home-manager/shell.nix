@@ -22,15 +22,10 @@
       # quick nix commit
       gnix() { git -C /etc/nixos add -A && git -C /etc/nixos commit -m "$1"; }
 
-      # only run for interactive shells
-      if [[ $- == *i* ]]; then
-      # don't start a zellij inside a zellij
-        if [ -z "$ZELLIJ" ]; then
-          # attach to "main" or create it
-          zellij attach -c main
-          # stop this shell so we don't have a zsh running underneath
-          exit
-        fi
+      # Auto-start zellij for interactive shells (but not in VSCode or already in zellij)
+      if [[ $- == *i* && -z "$ZELLIJ" && "$TERM_PROGRAM" != "vscode" ]]; then
+        zellij attach -c main
+        exit
       fi
     '';
     shellAliases = {
@@ -51,7 +46,7 @@
       glf = "git log --format=oneline";
 
       cnix = "sudo code /etc/nixos --no-sandbox --user-data-dir ~/.sudo-vscode";
-      nbs = "sudo nixos-rebuild switch --flake /etc/nixos#adam-laptop";
+      nbs = "sudo nixos-rebuild switch --flake /etc/nixos";
       secrets = "sudo EDITOR=hx SOPS_AGE_KEY=$(sudo ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key) sops /etc/nixos/secrets/secrets.yaml";
 
       night = "gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true";
