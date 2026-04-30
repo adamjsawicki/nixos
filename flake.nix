@@ -10,6 +10,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    # Always up-to-date Claude Code (hourly upstream updates)
+    claude-code-nix.url = "github:sadjow/claude-code-nix";
   };
 
   outputs =
@@ -20,6 +22,7 @@
       nixpkgs-2405,
       home-manager,
       sops-nix,
+      claude-code-nix,
       ...
     }:
     let
@@ -73,6 +76,8 @@
             # Set global 'allowUnfree'
             nixpkgs.config.allowUnfree = true;
 
+            # Overlay for claude-code from sadjow/claude-code-nix
+            nixpkgs.overlays = [ claude-code-nix.overlays.default ];
           }
         ];
       };
