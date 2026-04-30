@@ -51,6 +51,10 @@
 
       night = "gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true";
       day = "gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false";
+
+      # Local LLMs (ollama)
+      ollama-serve = "nvidia-offload ollama serve";
+      llm = "ollama run";
     };
   };
 
