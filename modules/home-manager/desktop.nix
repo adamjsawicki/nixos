@@ -47,6 +47,7 @@
         "brave-browser.desktop"
         "code.desktop"
         "com.mitchellh.ghostty.desktop"
+        "LocalSend.desktop"
         "proton.vpn.app.gtk.desktop"
         "org.remmina.Remmina.desktop"
         "spotify.desktop"

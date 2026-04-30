@@ -9,6 +9,7 @@
   home.packages = with pkgs; [
     # GUI apps
     brave
+    localsend
     obsidian
     protonvpn-gui
     pkgs-2405.remmina # FreeRDP 2.x - more stable with RD Gateway

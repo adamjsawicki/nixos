@@ -25,6 +25,10 @@
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
+  networking.firewall = {
+    allowedTCPPorts = [ 53317 ]; # LocalSend
+    allowedUDPPorts = [ 53317 ];
+  };
 
   time.timeZone = "America/New_York";
 
