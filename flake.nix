@@ -12,6 +12,8 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     # Always up-to-date Claude Code (hourly upstream updates)
     claude-code-nix.url = "github:sadjow/claude-code-nix";
+    # Requires garnix cache (no module provided, so we configure it manually below)
+    nix-openclaw.url = "github:openclaw/nix-openclaw";
   };
 
   outputs =
@@ -23,6 +25,7 @@
       home-manager,
       sops-nix,
       claude-code-nix,
+      nix-openclaw,
       ...
     }:
     let
@@ -51,6 +54,7 @@
           ./configuration.nix
           ./modules/power.nix
           ./modules/sops.nix
+          ./modules/flake-auto-update.nix
           sops-nix.nixosModules.sops
 
           home-manager.nixosModules.home-manager
