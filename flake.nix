@@ -80,8 +80,20 @@
             # Set global 'allowUnfree'
             nixpkgs.config.allowUnfree = true;
 
-            # Overlay for claude-code from sadjow/claude-code-nix
-            nixpkgs.overlays = [ claude-code-nix.overlays.default ];
+            # Overlays
+            nixpkgs.overlays = [
+              claude-code-nix.overlays.default
+              nix-openclaw.overlays.default
+            ];
+
+            # Make openclaw module available (enabled per-user in their config)
+            home-manager.sharedModules = [ nix-openclaw.homeManagerModules.openclaw ];
+
+            # Binary cache for nix-openclaw (garnix.io)
+            nix.settings.extra-substituters = [ "https://cache.garnix.io" ];
+            nix.settings.extra-trusted-public-keys = [
+              "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+            ];
           }
         ];
       };

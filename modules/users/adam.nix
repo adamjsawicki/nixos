@@ -1,6 +1,10 @@
-{ pkgs, ... }: {
-
-  imports = [ ../home-manager/base.nix ../home-manager/desktop.nix ];
+{ pkgs, ... }:
+{
+  imports = [
+    ../home-manager/base.nix
+    ../home-manager/desktop.nix
+    ../home-manager/openclaw.nix
+  ];
 
   programs.direnv = {
     enable = true;

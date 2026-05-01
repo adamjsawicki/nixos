@@ -19,4 +19,21 @@
   sops.secrets.notion_api_key = {
     owner = "adam";
   };
+  sops.secrets.telegram_bot_token = {
+    owner = "adam";
+  };
+  sops.secrets.openclaw_gateway_token = {
+    owner = "adam";
+  };
+
+  sops.templates."openclaw-env" = {
+    content = ''
+      OPENCLAW_GATEWAY_TOKEN=${config.sops.placeholder.openclaw_gateway_token}
+      ANTHROPIC_API_KEY=${config.sops.placeholder.anthropic_api_key}
+      OPENAI_API_KEY=${config.sops.placeholder.openai_api_key}
+      NOTION_API_KEY=${config.sops.placeholder.notion_api_key}
+    '';
+    owner = "adam";
+    path = "/run/secrets/openclaw-env";
+  };
 }

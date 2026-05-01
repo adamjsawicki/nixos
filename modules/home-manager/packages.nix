@@ -30,7 +30,7 @@
     # Coding Assistents
     claude-code
     codex
-    pkgs-unstable.openclaw # not available in 25.11
+    openclaw # provided by nix-openclaw overlay
 
     # Languages
     go

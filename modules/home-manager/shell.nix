@@ -10,12 +10,6 @@
       bindkey '^[[1;5C' forward-word   # Ctrl →
       bindkey '^[[1;5D' backward-word  # Ctrl ←
 
-      # Load secrets from sops-nix (if they exist)
-      [[ -r /run/secrets/openai_api_key ]] && export OPENAI_API_KEY=$(cat /run/secrets/openai_api_key)
-      [[ -r /run/secrets/brave_api_key ]] && export BRAVE_API_KEY=$(cat /run/secrets/brave_api_key)
-      [[ -r /run/secrets/anthropic_api_key ]] && export ANTHROPIC_API_KEY=$(cat /run/secrets/anthropic_api_key)
-      [[ -r /run/secrets/notion_api_key ]] && export NOTION_API_KEY=$(cat /run/secrets/notion_api_key)
-
       # find and replace: far 'old' 'new' file1 file2 ...
       far() { sed -i "s|$1|$2|g" "''${@:3}"; }
 
