@@ -11,6 +11,13 @@
     options = "--delete-older-than 14d";
   };
 
+  # Use /data for nix build scratch space — / is small, big builds (kernels,
+  # browsers, etc.) can blow past tmpfs. /data has hundreds of GB free.
+  systemd.services.nix-daemon.environment.TMPDIR = "/data/nix-build";
+  systemd.tmpfiles.rules = [
+    "d /data/nix-build 0755 root root -"
+  ];
+
   # Bootloader: ESP at /boot/efi, keep kernels on ext4 under /boot
   boot.loader = {
     grub.enable = true;
