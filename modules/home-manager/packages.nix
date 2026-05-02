@@ -32,9 +32,6 @@
     codex
     pkgs-unstable.openclaw # not available in 25.11
 
-    # Local LLMs
-    pkgs-unstable.ollama
-
     # Languages
     go
     nodejs
