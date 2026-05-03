@@ -23,9 +23,11 @@
       gnix() { git -C /etc/nixos add -A && git -C /etc/nixos commit -m "$1"; }
 
       # Auto-start zellij for interactive shells (but not in VSCode or already in zellij)
+      # Only exit if zellij ran cleanly — otherwise leave a usable shell to debug from.
       if [[ $- == *i* && -z "$ZELLIJ" && "$TERM_PROGRAM" != "vscode" ]]; then
-        zellij attach -c main
-        exit
+        if zellij attach -c main; then
+          exit
+        fi
       fi
     '';
     shellAliases = {

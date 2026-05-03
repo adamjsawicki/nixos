@@ -9,6 +9,7 @@
     ./shell.nix
     ./vcs.nix
     ./ollama.nix
+    ./zellij.nix
   ];
 
   programs.starship.enable = true;
