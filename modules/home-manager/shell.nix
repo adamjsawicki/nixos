@@ -42,7 +42,7 @@
       glf = "git log --format=oneline";
 
       cnix = "sudo code /etc/nixos --no-sandbox --user-data-dir ~/.sudo-vscode";
-      nbs = "sudo nixos-rebuild switch --flake /etc/nixos";
+      nbs = "nh os switch /etc/nixos";
       secrets = "sudo EDITOR=hx SOPS_AGE_KEY=$(sudo ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key) sops /etc/nixos/secrets/secrets.yaml";
 
       night = "gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true";

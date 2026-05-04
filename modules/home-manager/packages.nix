@@ -41,6 +41,9 @@
     # Allows 'jnoortheen.nix-ide' to work by providing language server + formatter
     nixfmt-rfc-style
     nil
+    nh # nixos-rebuild wrapper; needs nom + nvd on PATH for rich output
+    nix-output-monitor # provides `nom` — multi-build tree view
+    nvd # generation diff after rebuild
     fh # FlakeHub CLI
 
     # Secrets management
