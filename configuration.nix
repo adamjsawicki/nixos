@@ -122,10 +122,23 @@
     fsType = "ext4";
   };
 
-  # Shared /data partition (docker, ollama, large files)
+  # Shared /data partition (docker, ollama, large files).
+  # neededForBoot because /nix bind-mounts from /data/nix — initrd must
+  # mount /data before stage-2 can find the store.
   fileSystems."/data" = {
     device = "/dev/disk/by-label/data";
     fsType = "ext4";
+    neededForBoot = true;
+  };
+
+  # /nix lives on /data — root partition is only 96G and the store
+  # was filling it. Bind-mount keeps /data shared with docker/ollama/etc.
+  fileSystems."/nix" = {
+    device = "/data/nix";
+    fsType = "none";
+    options = [ "bind" ];
+    depends = [ "/data" ];
+    neededForBoot = true;
   };
 
   # Passwordless nixos-rebuild (optional)
