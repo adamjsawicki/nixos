@@ -12,7 +12,6 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     # Always up-to-date Claude Code (hourly upstream updates)
     claude-code-nix.url = "github:sadjow/claude-code-nix";
-    # Requires garnix cache (no module provided, so we configure it manually below)
     nix-openclaw.url = "github:openclaw/nix-openclaw";
   };
 
@@ -88,12 +87,6 @@
 
             # Make openclaw module available (enabled per-user in their config)
             home-manager.sharedModules = [ nix-openclaw.homeManagerModules.openclaw ];
-
-            # Binary cache for nix-openclaw (garnix.io)
-            nix.settings.extra-substituters = [ "https://cache.garnix.io" ];
-            nix.settings.extra-trusted-public-keys = [
-              "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-            ];
           }
         ];
       };
